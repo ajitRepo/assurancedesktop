@@ -5,35 +5,49 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class GetVoiture {
-    static String matricule;
-    static String marque;
-    static String model;
-    static String usage;
-    static int    puissance;
-    static String typeCarburant;
-    static int    nombrePlaces;
-    static String nfcid;
-    static String nom;
-    static String prenom;
-    static String telephone;
-    static String proprietaire;
+    static String        marque;
+    static String        model;
+    static String        usage;
+    static int           puissance;
+    static String        typeCarburant;
+    static int           nombrePlaces;
+    static Object        nfcid;
+    static String        nom;
+    static String        prenom;
+    static String        telephone;
+    public int           taille;
+    static String        matricule;
 
-    public static void main( String[] args ) {
-        // TODO Auto-generated method stub
-        try {
-            call_me();
-        } catch ( Exception e ) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+    static boolean       proprietaire;
+    public List<String>  listmarque        = new ArrayList<String>();
+    public List<String>  listmatricule     = new ArrayList<String>();
 
-    public static void call_me() throws Exception {
+    public List<String>  listmodel         = new ArrayList<String>();
+    public List<String>  listusage         = new ArrayList<String>();
+    public List<String>  listtypeCarburant = new ArrayList<String>();
+    public List<String>  listnom           = new ArrayList<String>();
+    public List<String>  listprenom        = new ArrayList<String>();
+
+    public List<Integer> listpuissance     = new ArrayList<Integer>();
+    public List<Integer> listnombrePlaces  = new ArrayList<Integer>();
+
+    public List<String>  listtelephone     = new ArrayList<String>();
+    public List<Object>  listnfcid         = new ArrayList<Object>();
+    public List<Boolean> listproprietaire  = new ArrayList<Boolean>();
+
+    /*
+     * public static void main( String[] args ) throws Exception { call_me();
+     * 
+     * }
+     */
+
+    public void call_me() throws Exception {
 
         String url = "http://212.71.244.7:8080/assurance/voitures";
 
@@ -64,27 +78,51 @@ public class GetVoiture {
         in.close();
         // print in String
         System.out.println( response.toString() );
-
         JSONObject myResponse = new JSONObject( response.toString() );
         System.out.println( myResponse.getString( "message" ) );
 
+        // liste voiture
         JSONObject user = myResponse.getJSONObject( "values" );
-        JSONArray voiture = user.getJSONArray( "Voiture" );
 
+        JSONArray voiture = user.getJSONArray( "Voiture" );
+        taille = voiture.length();
         System.out.println( voiture.length() );
         for ( int i = 0; i < voiture.length(); i++ ) {
 
             JSONObject tps = voiture.getJSONObject( i );
             JSONObject op = new JSONObject( tps.toString() );
-            System.out.println( op.getString( "typeCarburant" ) );
+
+            JSONObject chauff = op.getJSONObject( "chauffeur" );
 
             matricule = op.getString( "matricule" );
+
             marque = op.getString( "marque" );
             model = op.getString( "model" );
             usage = op.getString( "usage" );
             puissance = op.getInt( "puissance" );
             typeCarburant = op.getString( "typeCarburant" );
             nombrePlaces = op.getInt( "nombrePlaces" );
+            nfcid = chauff.get( "nfcid" );
+            nom = chauff.getString( "nom" );
+            prenom = chauff.getString( "prenom" );
+            telephone = chauff.getString( "telephone" );
+            proprietaire = chauff.getBoolean( "proprietaire" );
+
+            listmarque.add( marque );
+            listproprietaire.add( proprietaire );
+            listmodel.add( model );
+            listusage.add( usage );
+            listpuissance.add( puissance );
+            listtypeCarburant.add( typeCarburant );
+            listnfcid.add( nfcid );
+            listnom.add( nom );
+            listprenom.add( prenom );
+            listtelephone.add( telephone );
+            listmatricule.add( matricule );
+            listnombrePlaces.add( nombrePlaces );
+            listprenom.get( i );
+
+            ;
 
         }
 

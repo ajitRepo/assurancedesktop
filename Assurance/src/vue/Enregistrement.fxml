@@ -7,6 +7,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -225,9 +227,27 @@
                   </ImageView>
                </graphic>
             </Tab>
-            <Tab text="MODIFICATION">
+            <Tab onSelectionChanged="#tableaux" text="MODIFICATION">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="table_inscrit" layoutX="14.0" layoutY="123.0" prefHeight="444.0" prefWidth="1313.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="123.0">
+                          <columns>
+                              <TableColumn fx:id="colun_nom" prefWidth="69.0" text="nom" />
+                              <TableColumn fx:id="colun_prenom" prefWidth="93.0" text="Prenom" />
+                              <TableColumn fx:id="colun_telephone" minWidth="0.0" prefWidth="103.0" text="telephone" />
+                              <TableColumn fx:id="colun_nfcid" prefWidth="130.0" text="nfcid" />
+                              <TableColumn fx:id="colun_puissance" prefWidth="70.0" text="puissance" />
+                              <TableColumn fx:id="colun_carburan" prefWidth="116.0" text="typeCarburant" />
+                              <TableColumn fx:id="colun_model" prefWidth="93.0" text="Model" />
+                              <TableColumn fx:id="colun_Marque" prefWidth="116.0" text="Marque" />
+                              <TableColumn fx:id="colun_matricule" prefWidth="138.0" text="Matricule" />
+                              <TableColumn fx:id="colun_proprio" prefWidth="105.0" text="Proprietaire" />
+                              <TableColumn fx:id="colun_nbrplace" prefWidth="75.0" text="Nonbre de place" />
+                              <TableColumn fx:id="colun_usage" prefWidth="75.0" text="Usage" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
               </content>
                <graphic>
                   <ImageView fitHeight="46.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
